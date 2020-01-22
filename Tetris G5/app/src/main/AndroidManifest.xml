@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.tetris"
+    android:installLocation="auto">
+
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-feature android:required="false"
+        android:name="android.hardware.camera2"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+
+    <supports-screens
+        android:largeScreens="true"
+        android:anyDensity="true"
+        android:normalScreens="true"
+        android:smallScreens="true"
+        android:resizeable="true"
+        android:xlargeScreens="true" />
+
+    <application
+
+        android:allowBackup="true"
+        android:hardwareAccelerated="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="Tetris G5"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".view.MinecraftActivity"></activity>
+        <activity android:name=".view.RankingActivity" />
+        <activity android:name=".view.InitDBActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".view.GraphicActivity" />
+        <activity
+            android:name=".view.FinalScoreActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.GameActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.GammaActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.MenuActivity"
+
+            android:screenOrientation="portrait"></activity>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.tetris.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+        <meta-data android:name="android.support.FILE_PROVIDER_PATHS"
+            android:resource="@xml/file_paths"></meta-data></provider>
+
+
+    </application>
+
+</manifest>
