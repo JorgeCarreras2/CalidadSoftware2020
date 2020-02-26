@@ -8,9 +8,22 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.5.1'
-        
+
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
+    }
+}
+
+plugins {
+    id "org.sonarqube" version "2.8"
+}
+
+sonarqube {
+    properties {
+        property "sonar.projectKey", "JaviBarrio6_CalidadSoftware2020"
+        property "sonar.organization", "javibarrio6"
+        property "sonar.host.url", "https://sonarcloud.io"
+        property "sonar.login", "c1e2e366615e20967d21543b0ca1c627a0c2e3d0"
     }
 }
 
