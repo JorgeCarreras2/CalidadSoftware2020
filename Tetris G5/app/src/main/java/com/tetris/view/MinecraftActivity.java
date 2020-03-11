@@ -32,6 +32,7 @@ public class MinecraftActivity extends AppCompatActivity {
     private ImageButton bCelda7;
     private ImageButton bCelda8;
     private ImageButton bCelda9;
+
     private List<ImageButton> celdas = new ArrayList<>();
     private Vibrator vibe;
 
@@ -82,6 +83,7 @@ public class MinecraftActivity extends AppCompatActivity {
     }
 
     private void setUpButtonsCeldas() {
+
         bCelda1 = findViewById(R.id.celda1);
         bCelda1.setTag(0);
         bCelda1.setOnClickListener(new View.OnClickListener() {
@@ -174,74 +176,30 @@ public class MinecraftActivity extends AppCompatActivity {
     }
 
     private void setUpButtonsColors() {
-        ImageButton bColor1 = findViewById(R.id.color1);
-        bColor1.setImageResource(Colors.colorSelectorID(2));
+        colores(R.id.color1, 2);
+
+        colores(R.id.color2, 5);
+
+        colores(R.id.color3, 6);
+
+        colores(R.id.color4, 0);
+
+        colores(R.id.color5, 3);
+
+        colores(R.id.color6, 4);
+
+        colores(R.id.color7, 1);
+
+        colores(R.id.color8, 7);
+    }
+
+    private void colores(int p, final int i) {
+        ImageButton bColor1 = findViewById(p);
+        bColor1.setImageResource(Colors.colorSelectorID(i));
         bColor1.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View b) { colorEvent(2);
-            }
-        });
-
-        ImageButton bColor2 = findViewById(R.id.color2);
-        bColor2.setImageResource(Colors.colorSelectorID(5));
-        bColor2.setOnClickListener(new View.OnClickListener() {
-            @Override
             public void onClick(View b) {
-                colorEvent(5);
-            }
-        });
-
-        ImageButton bColor3 = findViewById(R.id.color3);
-        bColor3.setImageResource(Colors.colorSelectorID(6));
-        bColor3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View b) {
-                colorEvent(6);
-            }
-        });
-
-        ImageButton bColor4 = findViewById(R.id.color4);
-        bColor4.setImageResource(Colors.colorSelectorID(0));
-        bColor4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View b) {
-                colorEvent(0);
-            }
-        });
-
-        ImageButton bColor5 = findViewById(R.id.color5);
-        bColor5.setImageResource(Colors.colorSelectorID(3));
-        bColor5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View b) {
-                colorEvent(3);
-            }
-        });
-
-        ImageButton bColor6 = findViewById(R.id.color6);
-        bColor6.setImageResource(Colors.colorSelectorID(4));
-        bColor6.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View b) {
-                colorEvent(4);
-            }
-        });
-
-        ImageButton bColor7 = findViewById(R.id.color7);
-        bColor7.setImageResource(Colors.colorSelectorID(1));
-        bColor7.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View b) {
-                colorEvent(1);
-            }
-        });
-
-        ImageButton bColor8 = findViewById(R.id.color8);
-        bColor8.setImageResource(Colors.colorSelectorID(7));
-        bColor8.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View b) {
-                colorEvent(7);
+                colorEvent(i);
             }
         });
     }
@@ -288,67 +246,23 @@ public class MinecraftActivity extends AppCompatActivity {
     private void isClicked(int drawable, int i){
         int x = 4;
         int y = -4;
-        if ((i == 1) && (drawable != 0)) {
+        posiciones(drawable, i, x, y, 1, 0, 0);
+        posiciones(drawable, i, x + 1, y, 2, 1, 0);
+        posiciones(drawable, i, x + 2, y, 3, 2, 0);
+        posiciones(drawable, i, x, y + 1, 4, 0, 1);
+        posiciones(drawable, i, x + 1, y + 1, 5, 1, 1);
+        posiciones(drawable, i, x + 2, y + 1, 6, 2, 1);
+        posiciones(drawable, i, x, y + 2, 7, 0, 2);
+        posiciones(drawable, i, x + 1, y + 2, 8, 1, 2);
+        posiciones(drawable, i, x + 2, y + 2, 9, 2, 2);
+    }
+
+    private void posiciones(int drawable, int i, int x, int y, int posicionI, int posicionLocatorX, int posicionLocatorY) {
+        if ((i == posicionI) && (drawable != 0)) {
             Block block = new Block();
             block.setX(x);
             block.setY(y);
-            positionLocator[0][0]  = true;
-            blocksCustomShape.add(block);
-        }
-        if ((i == 2) && (drawable != 0)) {
-            Block block = new Block();
-            block.setX(x + 1);
-            block.setY(y);
-            positionLocator[1][0]  = true;
-            blocksCustomShape.add(block);
-        }
-        if ((i == 3) && (drawable != 0)) {
-            Block block = new Block();
-            block.setX(x + 2);
-            block.setY(y);
-            positionLocator[2][0]  = true;
-            blocksCustomShape.add(block);
-        }
-        if ((i == 4) && (drawable != 0)) {
-            Block block = new Block();
-            block.setX(x);
-            block.setY(y + 1);
-            positionLocator[0][1]  = true;
-            blocksCustomShape.add(block);
-        }
-        if ((i == 5) && (drawable != 0)) {
-            Block block = new Block();
-            block.setX(x + 1);
-            block.setY(y + 1);
-            positionLocator[1][1]  = true;
-            blocksCustomShape.add(block);
-        }
-        if ((i == 6) && (drawable != 0)) {
-            Block block = new Block();
-            block.setX(x + 2);
-            block.setY(y + 1);
-            positionLocator[2][1]  = true;
-            blocksCustomShape.add(block);
-        }
-        if ((i == 7) && (drawable != 0)) {
-            Block block = new Block();
-            block.setX(x);
-            block.setY(y + 2);
-            positionLocator[0][2]  = true;
-            blocksCustomShape.add(block);
-        }
-        if ((i == 8) && (drawable != 0)) {
-            Block block = new Block();
-            block.setX(x + 1);
-            block.setY(y + 2);
-            positionLocator[1][2]  = true;
-            blocksCustomShape.add(block);
-        }
-        if ((i == 9) && (drawable != 0)) {
-            Block block = new Block();
-            block.setX(x + 2);
-            block.setY(y + 2);
-            positionLocator[2][2]  = true;
+            positionLocator[posicionLocatorX][posicionLocatorY] = true;
             blocksCustomShape.add(block);
         }
     }
@@ -379,5 +293,6 @@ public class MinecraftActivity extends AppCompatActivity {
     public int getNumColor() {
         return numColor;
     }
+
 
 }
