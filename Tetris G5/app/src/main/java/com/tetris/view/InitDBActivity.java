@@ -28,6 +28,7 @@ import com.tetris.utils.UserSettings;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -88,7 +89,7 @@ public class InitDBActivity extends AppCompatActivity   {
 
     }
 
-    private void register(String img) {
+    private void register(String img) throws IOException {
         Integer id;
         puntuacion = 0;
         cursor.close();
@@ -101,8 +102,9 @@ public class InitDBActivity extends AppCompatActivity   {
             id = 1;
         }
         db = conn.getWritableDatabase();
+        InputStream fs = null;
         try{
-            FileInputStream fs = new FileInputStream(img);
+            fs = new FileInputStream(img);
             byte[] imgbyte = new byte[fs.available()];
             fs.read(imgbyte);
             values = new ContentValues();
@@ -111,9 +113,11 @@ public class InitDBActivity extends AppCompatActivity   {
             values.put("score",puntuacion);
             values.put("img",imgbyte);
             db.insert("ranking",null,values);
-            fs.close();
+
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            fs.close();
         }
         cursor2.close();
         db.close();
@@ -154,7 +158,11 @@ public class InitDBActivity extends AppCompatActivity   {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if(requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK){
-            register(absolutePath);
+            try {
+                register(absolutePath);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             Toast.makeText(getApplicationContext(), "registrado", Toast.LENGTH_LONG).show();
             Intent intent = new Intent(InitDBActivity.this, MenuActivity.class);
             startActivity(intent);
